@@ -35,30 +35,28 @@ export default function LoginPage() {
   };
 
   const recuperarClave = async () => {
-    if (!email) {
-      setError('Ingresa tu correo electrónico para recuperar la contraseña.');
-      return;
-    }
+  if (!email) {
+    alert('Ingresa tu correo electrónico para recuperar la contraseña.');
+    return;
+  }
 
-    setLoading(true);
-    setError(null);
-    setMessage(null);
+  setLoading(true);
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}/reset-password`,
+  });
 
-    setLoading(false);
+  setLoading(false);
 
-    if (error) {
-      setError(error.message);
-      return;
-    }
+  if (error) {
+    alert(error.message);
+    return;
+  }
 
-    setMessage(
-      'Te hemos enviado un correo para que puedas crear una nueva contraseña.'
-    );
-  };
+  alert(
+    'Te hemos enviado un correo para que puedas crear una nueva contraseña. Revisa tu bandeja de entrada o spam.'
+  );
+};
 
   return (
     <div
